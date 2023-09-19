@@ -1,27 +1,84 @@
+#version: '3'
+#services:
+#  tomcat:
+#    image: shopping-cart
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - my-network
+#
+#  mssql:
+#    image: mcr.microsoft.com/mssql/server
+#    environment:
+#      SA_PASSWORD: YourStrongPassword
+#      ACCEPT_EULA: Y
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#    ports:
+#      - "1433:1433" # Mapeando a porta 1433 do container para a porta 1433 do host
+#    networks:
+#      - my-network
+#    command: ["/bin/sh", "-c", "while sleep 3600; do :; done"] # Mantém o container MSSQL em execução
+#
+#volumes:
+#  mysql_data:
+#
+#networks:
+#  my-network:
+    
+    
+    
+#version: '3'
+#services:
+#  tomcat:
+#    image: tiagohuf/shopping-cart:2.0
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - my-network
+#
+#  mysql:
+#    image: mysql:latest
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: shopping-cart
+#      MYSQL_PASSWORD: 32105
+#      MYSQL_INITDB_SCRIPT: /docker-entrypoint-initdb.d/mysql_query.sql
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#      - ./databases:/docker-entrypoint-initdb.d
+#    ports:
+#        - "3308:3306"
+#    networks:
+#      - my-network
+#
+#volumes:
+#  mysql_data: 
+#
+#networks:
+#  my-network:
+    
+    
 version: '3'
-services:
-  tomcat:
-    image: shopping_cart
-    ports:
-      - "8080:8080"
-    networks:
-      - my-network
 
-  mysql:
+services:
+   shopping-cart:
+    build: .
+    ports:
+      - 8080:8080
+            
+   mysql:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 32106
-      MYSQL_DATABASE: shoppin-cart
-      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shopping-cart
+      MYSQL_PASSWORD: 32106
+      MYSQL_INITDB_SCRIPT: /docker-entrypoint-initdb.d/mysql_query.sql
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./databases:/docker-entrypoint-initdb.d
     ports:
-      - "3308:3306"
-    networks:
-      - my-network
-
+        - 3308:3306
+      
 volumes:
   mysql_data: 
-
-networks:
-  my-network:
