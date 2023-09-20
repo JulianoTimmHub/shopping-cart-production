@@ -11,7 +11,7 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: 32106
-      MYSQL_DATABASE: shoppin-cart
+      MYSQL_DATABASE: shopping-cart
       MYSQL_PASSWORD: 1234
     volumes:
       - mysql_data:/var/lib/mysql
