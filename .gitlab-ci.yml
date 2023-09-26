@@ -9,7 +9,7 @@ Deploy:
     only:
         - main
     script:
-        - podman-compose up -d --force-recreate
+        - podman-compose up -d --build --force-recreate
     tags:
         - Biopark
     environment:
