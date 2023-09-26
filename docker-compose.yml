@@ -9,7 +9,7 @@ services:
       - mysql
             
    mysql:
-    image: mysql:latest
+    image: docker.io/library/mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: shopping-cart
@@ -19,7 +19,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./databases:/docker-entrypoint-initdb.d
     ports:
-        - 3308:3306
+        - 2021:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
