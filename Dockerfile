@@ -6,7 +6,7 @@ COPY . /app
 
 RUN mvn clean package
 
-FROM tomcat:9.0.8
+FROM docker.io/library/tomcat:9.0.8
 
 COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/
 
