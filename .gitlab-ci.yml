@@ -1,0 +1,17 @@
+variables:
+    GROUP_NAME: smarttech
+
+stages:
+    - Deploy
+
+Deploy:
+    stage: Deploy
+    only:
+        - main
+    script:
+        - podman-compose up -d --force-recreate
+    tags:
+        - Biopark
+    environment:
+        name: Production
+        url: https://$GROUP_NAME.biopark.smartflow.me
